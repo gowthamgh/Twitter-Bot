@@ -1,13 +1,9 @@
 var Twitter = require('twitter');
-var client = new Twitter({
-    consumer_key: 'bGlHwihMkfvlh90BCqw0UF8Tc',
-    consumer_secret: 'WIo1UAses4mGc6FDIkMm2WOMxRLEWFMhtsBTGe26ywNTAfdVNS',
-    access_token_key: '163440698-Xc0s1FYNWHT8SQS81fodIfZkYelYNNDZXbSL0lJk',
-    access_token_secret: 'PDlWorCZQyi9PnUoI6fVroX9pMaxqiRFDoASVblNdkRSh'
-});
+var config = require('./config.js');
+var client = new Twitter(config);
 
 var params = {
-    q: '#javascript',
+    q: '#CaptainMarvel',
     count: 2,
     result_type: 'recent',
     lang: 'en'
