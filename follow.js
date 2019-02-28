@@ -1,25 +1,23 @@
 var Twitter = require('twitter');
 var config = require('./config.js');
-var client = new Twitter(config);
+var T = new Twitter(config);
 
 var params = {
-    q: '#CaptainMarvel',
-    count: 2,
+    q: '#Avengers',
+    count: 3,
     result_type: 'recent',
     lang: 'en'
 }
 
-client.get('search/tweets', params, function(err, data, response){
+T.get('search/tweets', params, function(err, data, response){
     if(!err){
         for(let i=0; i < data.statuses.length; i++){
-            let id =  { id: data.statuses[i].id_str }
-            client.post('favorites/create', id, function(err, response){
+            let screen_name = data.statuses[i].user.screen_name;
+            T.post('friendships/create', {screen_name}, function(err, res){
                 if(err){
-                    console.log(err[0].message);
+                    console.log(err);
                 }else{
-                    let username = response.user.screen_name;
-                    let tweetId = response.id_str;
-                    console.log('Favorited: ', `https://twitter.com/${username}/status/${tweetId}`)
+                    console.log(screen_name, '**Followed**');
                 }
             });
         }
